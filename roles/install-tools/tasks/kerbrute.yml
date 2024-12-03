@@ -1,0 +1,3 @@
+---
+- name: "installing kerbrute"
+  shell: go install github.com/ropnop/kerbrute@master

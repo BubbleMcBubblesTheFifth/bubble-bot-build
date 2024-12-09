@@ -19,6 +19,7 @@
       - exiftool
       - golang
       - bloodhound
+      - gobuster
     state: latest
   become: true
   become_method: sudo

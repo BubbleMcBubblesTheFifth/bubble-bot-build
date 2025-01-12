@@ -21,6 +21,8 @@
       - bloodhound
       - gobuster
       - seclists
+      - feroxbuster
+      - xclip
     state: latest
   become: true
   become_method: sudo

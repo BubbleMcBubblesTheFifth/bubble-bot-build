@@ -21,6 +21,10 @@
     - { repo: "jpillora/chisel",  regex: "_windows_amd64.gz", location: "/opt/chisel" }
     - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "/opt/peas" }
     - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "/opt/peas" }
+    - { repo: "itm4n/PrintSpoofer", regex: "PrintSpoofer64.exe", location: "/opt/potatoes"}
+    - { repo: "BeichenDream/GodPotato", regex: "GodPotato-NET4.exe", location: "/opt/potatoes"}
+    - { repo: "ohpe/juicy-potato", regex: "JuicyPotato.exe", location: "/opt/potatoes"}
+    - { repo: "DominicBreuker/pspy", regex: "pspy64", location: "/opt/privesc" }
   async: 45
   poll: 0 
   become: true

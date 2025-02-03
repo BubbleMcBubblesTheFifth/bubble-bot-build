@@ -264,3 +264,4 @@ PATH=$GOPATH/bin/:$GOROOT/bin:$PATH
 # Useful aliases
 alias http="python -m http.server"
 alias htbVPN='sudo openvpn /home/bubbles/Documents/htb/lab_Blueflood.ovpn'
+alias oscpVPN='sudo openvpn /home/bubbles/Documents/pgpractice/universal.ovpn'

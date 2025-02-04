@@ -8,27 +8,44 @@
   copy: 
     src: "files/githubdownload.py"
     dest: "{{ build_dir.path }}/githubdownload.py"
-    owner: root
-    group: root
-    mode: 0755
-  become: true
-  become_method: sudo
+    owner: bubbles
+    group: bubbles
+    mode: 0755 
 
 - name: "Downloading github releases"
   shell: "{{ build_dir.path }}/githubdownload.py {{ item.repo }} {{ item.regex }} {{ item.location }} {% if item.filename is defined %}{{ item.filename }}{% endif %}"
   loop: 
-    - { repo: "jpillora/chisel",  regex: "_linux_amd64.gz", location: "/opt/chisel" }
-    - { repo: "jpillora/chisel",  regex: "_windows_amd64.gz", location: "/opt/chisel" }
-    - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "/opt/peas" }
-    - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "/opt/peas" }
-    - { repo: "itm4n/PrintSpoofer", regex: "PrintSpoofer64.exe", location: "/opt/potatoes"}
-    - { repo: "BeichenDream/GodPotato", regex: "GodPotato-NET4.exe", location: "/opt/potatoes"}
-    - { repo: "ohpe/juicy-potato", regex: "JuicyPotato.exe", location: "/opt/potatoes"}
-    - { repo: "DominicBreuker/pspy", regex: "pspy64", location: "/opt/privesc" }
+    - { repo: "jpillora/chisel",  regex: "_linux_amd64.gz", location: "/opt/portforward/chisel" }
+    - { repo: "jpillora/chisel",  regex: "_windows_amd64.gz", location: "/opt/portforward/chisel" }
+    - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "/opt/privesc/peas" }
+    - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "/opt/privesc/peas" }
+    - { repo: "itm4n/PrintSpoofer", regex: "PrintSpoofer64.exe", location: "/opt/privesc/potatoes"}
+    - { repo: "BeichenDream/GodPotato", regex: "GodPotato-NET4.exe", location: "/opt/privesc/potatoes"}
+    - { repo: "ohpe/juicy-potato", regex: "JuicyPotato.exe", location: "/opt/privesc/potatoes"}
+    - { repo: "DominicBreuker/pspy", regex: "pspy64", location: "/opt/privesc/privesc" } 
+    - { repo: "nicocha30/ligolo-ng", regex: "_linux_amd64", location: "/opt/portforward/ligolo/linuxagent"}
+    # - { repo: "nicocha30/ligolo-ng", regex: "_linux_amd64.tar.gz", location: "/opt/portforward/ligolo"}
   async: 45
-  poll: 0 
-  become: true
-  become_method: sudo
+  poll: 0  
+
+- name: Cloning github repositories 
+  vars: 
+    target_directory: "/opt" 
+    repositories:
+      - repo: "https://github.com/urbanadventurer/username-anarchy.git"
+        dest: "{{ target_directory }}/enum/username-anarchy"
+      - repo: "https://github.com/Tib3rius/AutoRecon.git"
+        dest: "{{ target_directory }}/enum/autorecon" 
+      - repo: "https://github.com/CravateRouge/bloodyAD.git"
+        dest: "{{ target_directory }}/privesc/bloodyAD"
+      - repo: "https://github.com/ShutdownRepo/pywhisker.git"
+        dest: "{{ target_directory }}/privesc/pywhisker"  
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}" 
+    update: yes
+  loop: "{{ repositories }}" 
+
 
 - name: Remove temporary build directory
   ansible.builtin.file: 

@@ -28,6 +28,8 @@ def get_github_release_url(metadata, regex):
     Returns: URL of the Binary
     """
     try:
+        if "__BACKSLASH__" in regex: 
+            regex = regex.replace("__BACKSLASH__", "\\")
         regex = re.compile(regex)    
         for item in metadata["assets"]:
             if re.findall(regex, item["name"]):        
@@ -82,7 +84,7 @@ def extract_tar(compressed_data, out_file):
         gzip_header = compressed_data.getvalue()[:10]
         if gzip_header.startswith(b"\x1f\x8b"):
             with gzip.open(compressed_data, "rb") as gz:
-                with tarfile.open(fileobj=gz, mode="r:gz") as tar:
+                with tarfile.open(fileobj=gz, mode="r:") as tar:
                     tar.extractall(path=out_file)    
                     return
         else:

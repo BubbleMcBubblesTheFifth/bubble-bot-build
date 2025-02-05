@@ -23,8 +23,8 @@
     - { repo: "BeichenDream/GodPotato", regex: "GodPotato-NET4.exe", location: "/opt/privesc/potatoes"}
     - { repo: "ohpe/juicy-potato", regex: "JuicyPotato.exe", location: "/opt/privesc/potatoes"}
     - { repo: "DominicBreuker/pspy", regex: "pspy64", location: "/opt/privesc/privesc" } 
-    - { repo: "nicocha30/ligolo-ng", regex: "_linux_amd64", location: "/opt/portforward/ligolo/linuxagent"}
-    # - { repo: "nicocha30/ligolo-ng", regex: "_linux_amd64.tar.gz", location: "/opt/portforward/ligolo"}
+    - { repo: "nicocha30/ligolo-ng", regex: 'ligolo-ng_proxy_[__BACKSLASH__d__BACKSLASH__.]+_linux_amd64', location: "/opt/portforward/ligolo/linuxproxy"}
+    - { repo: "nicocha30/ligolo-ng", regex: "ligolo-ng_agent_[__BACKSLASH__d__BACKSLASH__.]+_windows_amd64.zip", location: "/opt/portforward/ligolo/windowsagent"}
   async: 45
   poll: 0  
 

@@ -8,8 +8,6 @@
   copy: 
     src: "files/githubdownload.py"
     dest: "{{ build_dir.path }}/githubdownload.py"
-    owner: bubbles
-    group: bubbles
     mode: 0755 
 
 - name: "Downloading github releases"

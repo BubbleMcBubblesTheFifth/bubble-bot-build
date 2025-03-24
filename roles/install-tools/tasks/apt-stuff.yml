@@ -23,6 +23,13 @@
       - seclists
       - feroxbuster
       - xclip
+      - docker.io
     state: latest
   become: true
   become_method: sudo
+
+- name: Enable Docker service to start on boot
+  systemd: 
+    name: docker
+    enabled: yes
+    state: started
